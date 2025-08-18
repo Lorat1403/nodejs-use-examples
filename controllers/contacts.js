@@ -1,4 +1,4 @@
-import * as contacts from "../models/contacts.js";
+import * as contacts from "../models/api/contacts.js";
 import httpError from "../helpers/httpError.js";
 
 export const add = async (req, res, next) => {
