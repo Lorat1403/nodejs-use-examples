@@ -18,4 +18,10 @@ router.delete("/:id", ctrlWrapper(ctrl.removeById));
 
 router.put("/:id", validateBody(addSchema), ctrlWrapper(ctrl.updateById));
 
+router.patch(
+  "/:id/favorite",
+  validateBody(addSchema),
+  ctrlWrapper(ctrl.updateFavorite)
+);
+
 export default router;
