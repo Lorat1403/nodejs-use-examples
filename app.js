@@ -1,6 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
+import "dotenv/config"; // Ensure environment variables are loaded
 
 import router from "./routes/api/contacts.js";
 

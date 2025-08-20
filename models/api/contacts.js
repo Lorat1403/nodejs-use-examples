@@ -1,17 +1,21 @@
-const listContacts = async () => {};
+import { Schema, model } from "mongoose";
 
-const getContactById = async (contactId) => {};
+export const contactSchema = new Schema({
+  name: {
+    type: String,
+    required: [true, "Set name for contact"],
+  },
+  email: {
+    type: String,
+  },
+  phone: {
+    type: String,
+  },
 
-const removeContact = async (contactId) => {};
+  favorite: {
+    type: Boolean,
+    default: false,
+  },
+});
 
-const addContact = async (body) => {};
-
-const updateContact = async (contactId, body) => {};
-
-export {
-  listContacts,
-  getContactById,
-  removeContact,
-  addContact,
-  updateContact,
-};
+export const Contact = model("Contact", contactSchema);
