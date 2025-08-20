@@ -2,26 +2,32 @@ import express from "express";
 
 import ctrlWrapper from "../../helpers/ctrlWrapper.js";
 import validateBody from "../../middlewares/validateBody.js";
+import authenticate from "../../middlewares/authenticate.js";
+import isValidId from "../../middlewares/isValidId.js";
 
 import addSchema from "../../schemas/contact.js";
 import * as ctrl from "../../controllers/contacts.js";
 
-const router = express.Router();
+const contactsRouter = express.Router();
 
-router.get("/", ctrlWrapper(ctrl.getAll));
+contactsRouter.get("/", ctrlWrapper(ctrl.getAll));
 
-router.get("/:id", ctrlWrapper(ctrl.getById));
+contactsRouter.get("/:id", ctrlWrapper(ctrl.getById));
 
-router.post("/", validateBody(addSchema), ctrlWrapper(ctrl.add));
+contactsRouter.post("/", validateBody(addSchema), ctrlWrapper(ctrl.add));
 
-router.delete("/:id", ctrlWrapper(ctrl.removeById));
+contactsRouter.delete("/:id", ctrlWrapper(ctrl.removeById));
 
-router.put("/:id", validateBody(addSchema), ctrlWrapper(ctrl.updateById));
+contactsRouter.put(
+  "/:id",
+  validateBody(addSchema),
+  ctrlWrapper(ctrl.updateById)
+);
 
-router.patch(
+contactsRouter.patch(
   "/:id/favorite",
   validateBody(addSchema),
   ctrlWrapper(ctrl.updateFavorite)
 );
 
-export default router;
+export default contactsRouter;

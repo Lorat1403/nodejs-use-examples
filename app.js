@@ -3,9 +3,8 @@ import morgan from "morgan";
 import cors from "cors";
 import "dotenv/config"; // Ensure environment variables are loaded
 
-import router from "./routes/api/contacts.js";
-
-const contactsRouter = router;
+import contactsRouter from "./routes/api/contacts.js";
+import authRouter from "./routes/api/auth.js";
 
 const app = express();
 // Налаштування логування
@@ -17,6 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/contacts", contactsRouter);
+app.use("/api/users", authRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello from App!");
@@ -27,7 +27,8 @@ app.use((req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  res.status(500).json({ message: err.message });
+  const { status = 500, message = "Server error" } = err;
+  res.status(status).json({ message });
 });
 
 // Експорт об'єкта `app` як дефолтний
